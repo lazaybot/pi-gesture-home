@@ -1,0 +1,8 @@
+[
+  {"timestamp": 0.0, "pose": "open_palm", "confidence": 0.94, "palm_x": 0.5, "palm_y": 0.5},
+  {"timestamp": 0.4, "pose": "open_palm", "confidence": 0.95, "palm_x": 0.5, "palm_y": 0.5},
+  {"timestamp": 0.85, "pose": "open_palm", "confidence": 0.96, "palm_x": 0.5, "palm_y": 0.5},
+  {"timestamp": 1.0, "pose": "thumbs_up", "confidence": 0.91, "palm_x": 0.5, "palm_y": 0.5},
+  {"timestamp": 1.25, "pose": "thumbs_up", "confidence": 0.92, "palm_x": 0.5, "palm_y": 0.5},
+  {"timestamp": 1.5, "pose": "thumbs_up", "confidence": 0.93, "palm_x": 0.5, "palm_y": 0.5}
+]
