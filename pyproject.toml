@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pi-gesture-home"
+version = "0.1.0"
+description = "Local hand-motion control for low-risk Home Assistant devices"
+requires-python = ">=3.9"
+license = "Apache-2.0"
+authors = [{name = "Jaden LyTran"}]
+dependencies = []
+
+[project.optional-dependencies]
+mqtt = ["paho-mqtt>=2.1"]
+camera = ["mediapipe>=0.10.14", "opencv-python>=4.8", "numpy>=1.24"]
+hardware = ["gpiozero>=2.0"]
+
+[project.scripts]
+pi-gesture-home = "pi_gesture_home.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["pi_gesture_home*"]
+
+[tool.setuptools.package-data]
+pi_gesture_home = ["config/*.json"]
