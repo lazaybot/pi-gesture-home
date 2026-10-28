@@ -1,0 +1,58 @@
+# Example Home Assistant automation. Review entity IDs before enabling.
+automation:
+  - alias: PiGesture Home command router
+    mode: single
+    trigger:
+      - platform: mqtt
+        topic: pi-gesture-home/command
+    condition:
+      - condition: template
+        value_template: >-
+          {{ trigger.payload_json.entity_id.split('.')[0]
+             in ['light', 'fan', 'media_player'] }}
+    action:
+      - choose:
+          - conditions: >-
+              {{ trigger.payload_json.service == 'turn_on'
+                 and trigger.payload_json.entity_id.startswith('light.') }}
+            sequence:
+              - service: light.turn_on
+                target:
+                  entity_id: "{{ trigger.payload_json.entity_id }}"
+          - conditions: >-
+              {{ trigger.payload_json.service == 'turn_off'
+                 and trigger.payload_json.entity_id.startswith('light.') }}
+            sequence:
+              - service: light.turn_off
+                target:
+                  entity_id: "{{ trigger.payload_json.entity_id }}"
+          - conditions: >-
+              {{ trigger.payload_json.service == 'brightness_step'
+                 and trigger.payload_json.entity_id.startswith('light.') }}
+            sequence:
+              - service: light.turn_on
+                target:
+                  entity_id: "{{ trigger.payload_json.entity_id }}"
+                data:
+                  brightness_step_pct: "{{ trigger.payload_json.value }}"
+          - conditions: >-
+              {{ trigger.payload_json.service == 'media_next_track'
+                 and trigger.payload_json.entity_id.startswith('media_player.') }}
+            sequence:
+              - service: media_player.media_next_track
+                target:
+                  entity_id: "{{ trigger.payload_json.entity_id }}"
+          - conditions: >-
+              {{ trigger.payload_json.service == 'turn_on'
+                 and trigger.payload_json.entity_id.startswith('fan.') }}
+            sequence:
+              - service: fan.turn_on
+                target:
+                  entity_id: "{{ trigger.payload_json.entity_id }}"
+          - conditions: >-
+              {{ trigger.payload_json.service == 'turn_off'
+                 and trigger.payload_json.entity_id.startswith('fan.') }}
+            sequence:
+              - service: fan.turn_off
+                target:
+                  entity_id: "{{ trigger.payload_json.entity_id }}"
