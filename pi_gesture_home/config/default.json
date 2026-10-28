@@ -1,0 +1,19 @@
+{
+  "gestures": {
+    "light_on": {"entity_id": "light.desk", "service": "turn_on"},
+    "light_off": {"entity_id": "light.desk", "service": "turn_off"},
+    "brighter": {"entity_id": "light.desk", "service": "brightness_step", "value": 20},
+    "dimmer": {"entity_id": "light.desk", "service": "brightness_step", "value": -20},
+    "media_next": {"entity_id": "media_player.room", "service": "media_next_track"}
+  },
+  "mqtt": {"host": "homeassistant.local", "port": 1883},
+  "safety": {
+    "confidence_threshold": 0.78,
+    "activation_seconds": 0.8,
+    "command_seconds": 0.45,
+    "armed_timeout_seconds": 4.0,
+    "cooldown_seconds": 2.0,
+    "swipe_distance": 0.28,
+    "max_history_seconds": 1.2
+  }
+}
